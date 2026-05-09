@@ -54,11 +54,18 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(
-            "http://localhost:5173", 
-            "http://localhost:3000",
-            System.getenv("FRONTEND_URL") != null ? System.getenv("FRONTEND_URL") : "http://localhost:5173"
-        ));
+        
+        java.util.List<String> origins = new java.util.ArrayList<>();
+        origins.add("http://localhost:5173");
+        origins.add("http://localhost:3000");
+        
+        String frontendUrl = System.getenv("FRONTEND_URL");
+        if (frontendUrl != null && !frontendUrl.isBlank()) {
+            // Remove trailing slash if present
+            origins.add(frontendUrl.replaceAll("/$", ""));
+        }
+        
+        config.setAllowedOrigins(origins);
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
