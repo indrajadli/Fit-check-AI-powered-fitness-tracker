@@ -55,26 +55,19 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         
-        java.util.List<String> origins = new java.util.ArrayList<>();
-        origins.add("http://localhost:5173");
-        origins.add("http://localhost:3000");
+        // Allow all origins for this portfolio project to prevent any deployment URL mismatches
+        config.setAllowedOriginPatterns(List.of("*"));
         
-        String frontendUrl = System.getenv("FRONTEND_URL");
-        if (frontendUrl != null && !frontendUrl.isBlank()) {
-            // Remove trailing slash if present
-            origins.add(frontendUrl.replaceAll("/$", ""));
-        }
-        
-        config.setAllowedOrigins(origins);
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
         config.setMaxAge(3600L);
-
+        
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
