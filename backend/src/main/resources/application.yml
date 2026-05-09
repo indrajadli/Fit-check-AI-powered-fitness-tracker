@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
@@ -32,10 +32,9 @@ spring:
 
 app:
   jwt:
-    secret: YWktd29ya291dC10cmFja2VyLXN1cGVyLXNlY3JldC1rZXktdGhhdC1pcy1sb25nLWVub3VnaC1mb3ItaG1hYy1zaGEyNTY=
+    secret: ${JWT_SECRET:YWktd29ya291dC10cmFja2VyLXN1cGVyLXNlY3JldC1rZXktdGhhdC1pcy1sb25nLWVub3VnaC1mb3ItaG1hYy1zaGEyNTY=}
     access-token-expiration-ms: 900000
     refresh-token-expiration-ms: 604800000
   gemini:
-    api-key: AIzaSyCuPAVml7ZKcicq_9rKZF2kO-KFXNDFuT4
+    api-key: ${GEMINI_API_KEY:default-key}
     model: gemini-2.5-flash
-    

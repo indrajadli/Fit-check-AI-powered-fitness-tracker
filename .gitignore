@@ -1,0 +1,25 @@
+# Root level
+implementation_plan.md
+PROJECT_PROGRESS.md
+
+# Backend
+backend/data/
+backend/hs_err_*.log
+backend/replay_*.log
+backend/target/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/
