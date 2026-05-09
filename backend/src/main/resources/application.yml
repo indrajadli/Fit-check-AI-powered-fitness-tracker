@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: workout-tracker
+
+  datasource:
+    url: jdbc:h2:file:./data/workoutdb;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  sql:
+    init:
+      mode: never
+
+app:
+  jwt:
+    secret: YWktd29ya291dC10cmFja2VyLXN1cGVyLXNlY3JldC1rZXktdGhhdC1pcy1sb25nLWVub3VnaC1mb3ItaG1hYy1zaGEyNTY=
+    access-token-expiration-ms: 900000
+    refresh-token-expiration-ms: 604800000
+  gemini:
+    api-key: AIzaSyCuPAVml7ZKcicq_9rKZF2kO-KFXNDFuT4
+    model: gemini-2.5-flash
+    
