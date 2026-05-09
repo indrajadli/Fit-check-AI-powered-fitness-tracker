@@ -161,7 +161,7 @@ public class WorkoutService {
                     prMap.put(ex.getId(), PersonalRecordDTO.builder()
                             .exerciseId(ex.getId())
                             .exerciseName(ex.getName())
-                            .bodyPart(ex.getBodyPart())
+                            .bodyPart(ex.getBodyPart().name())
                             .weight(weight)
                             .reps(set.getReps() != null ? set.getReps() : 0)
                             .date(session.getStartTime())
