@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getActiveWorkout, startWorkout as apiStartWorkout, finishWorkout as apiFinishWorkout } from '../api/workoutService';
+import { useAuth } from './AuthContext';
 import { toast } from 'react-hot-toast';
 
 const WorkoutContext = createContext();
@@ -8,9 +9,17 @@ export const WorkoutProvider = ({ children }) => {
   const [activeSession, setActiveSession] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Check for active session on mount
+  const { user } = useAuth();
+
+  // Check for active session on mount or user change
   useEffect(() => {
     const fetchActiveSession = async () => {
+      if (!user) {
+        setIsLoading(false);
+        setActiveSession(null);
+        return;
+      }
+      
       try {
         const session = await getActiveWorkout();
         if (session) {
@@ -24,7 +33,7 @@ export const WorkoutProvider = ({ children }) => {
     };
 
     fetchActiveSession();
-  }, []);
+  }, [user]);
 
   const startNewWorkout = async () => {
     try {
